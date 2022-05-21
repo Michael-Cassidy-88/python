@@ -1,5 +1,7 @@
 import boto3
 
+# lists the creation date and time of an s3 bucket
+
 s3 = boto3.client('s3')
 response = s3.list_buckets() # list buckets
 
