@@ -31,3 +31,4 @@ def create_food_table(dynamodb = None):
 if __name__ == '__main__':
     food_table = create_food_table()
     print(f"Created table.")
+    

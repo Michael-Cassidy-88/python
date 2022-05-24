@@ -29,3 +29,4 @@ if __name__ == '__main__':
     food_table9 = write_food_table("DarkChocolate", "Fat", "Magnesium")
     food_table10 = write_food_table("CoffeeBean", "Carb", "ChlorogenicAcid")
     print(f"Items created")
+    
