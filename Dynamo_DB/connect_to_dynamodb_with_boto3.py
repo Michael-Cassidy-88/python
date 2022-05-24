@@ -8,3 +8,4 @@ dynamodb = boto3.resource(
     aws_secret_access_key='xxxxxxxxxxxxxxxx',
     )
     
+    
