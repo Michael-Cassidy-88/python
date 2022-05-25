@@ -31,14 +31,13 @@ def lambda_handler(event, context):
         
     print(flag)    
     
-    #Decision Making
+    # Stopping EC2 instance
     
     if flag=='STOP':
-        #Stop EC2
         response = ec2client.stop_instances(InstanceIds=[ec2_instance_id])
     
+    # SNS notification
         
-        #Send threatening email
         snsarn='<TopicARN>'
         errormsg= "EC2 " + ec2_instance_id + " Stopped"
         snsresponse = snsclient.publish(TopicArn=snsarn,
