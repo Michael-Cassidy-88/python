@@ -27,10 +27,3 @@ def lambda_handler(event, context):
             }
         )
         print("Wrote message to DynamoDB:", json.dumps(response))
-            }
-        )
-        print("Wrote message to DynamoDB:", json.dumps(response))
-
-        # Delete SQS message
-        message.delete()
-        print("Deleted message:", message.message_id)
