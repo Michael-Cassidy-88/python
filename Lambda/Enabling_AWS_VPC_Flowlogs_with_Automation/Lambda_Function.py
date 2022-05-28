@@ -1,20 +1,31 @@
-import boto3
 import os
+import boto3
+from botocore.exceptions import ClientError
+
+ROLE_ARN = os.environ['ROLE_ARN']
+
+ec2 = boto3.client('ec2')
+logs = boto3.client('logs')
 
 
 def lambda_handler(event, context):
-    '''
-    Extract the VPC ID from the event and enable VPC Flow Logs.
-    '''
 
     try:
+        # Extract the VPC ID from the event
         vpc_id = event['detail']['responseElements']['vpc']['vpcId']
+
+        flow_logs_group = 'VPCFlowLogs-' + vpc_id
 
         print('VPC: ' + vpc_id)
 
-        ec2_client = boto3.client('ec2')
+        try:
+            response = logs.create_log_group(
+                logGroupName=flow_logs_group)
+        except ClientError:
+            print(f"Log group '{flow_logs_group}' already exists.")
 
-        response = ec2_client.describe_flow_logs(
+        # Get Flow Logs status
+        response = ec2.describe_flow_logs(
             Filter=[
                 {
                     'Name': 'resource-id',
@@ -25,23 +36,20 @@ def lambda_handler(event, context):
             ],
         )
 
-        if len(response[u'FlowLogs']) != 0:
+        if len(response['FlowLogs']) > 0:
             print('VPC Flow Logs are ENABLED')
         else:
-            print('VPC Flow Logs are DISABLED')
+            print('VPC Flow Logs are DISABLED. Enabling...')
 
-            print('FLOWLOGS_GROUP_NAME: ' + os.environ['FLOWLOGS_GROUP_NAME'])
-            print('ROLE_ARN: ' + os.environ['ROLE_ARN'])
-
-            response = ec2_client.create_flow_logs(
+            response = ec2.create_flow_logs(
                 ResourceIds=[vpc_id],
                 ResourceType='VPC',
                 TrafficType='ALL',
-                LogGroupName=os.environ['FLOWLOGS_GROUP_NAME'],
-                DeliverLogsPermissionArn=os.environ['ROLE_ARN'],
+                LogGroupName=flow_logs_group,
+                DeliverLogsPermissionArn=ROLE_ARN,
             )
 
-            print('Created Flow Logs: ' + response['FlowLogIds'][0])
+            print('Created Flow Logs:' + response['FlowLogIds'][0])
 
     except Exception as e:
         print('Error - reason "%s"' % str(e))
