@@ -3,7 +3,7 @@ import requests
 
 def lambda_handler(event, context):
 
-    response = requests.get('https://linuxacademy.com')
+    response = requests.get('<website>')
     if response:
         print('Success!')
     else:
