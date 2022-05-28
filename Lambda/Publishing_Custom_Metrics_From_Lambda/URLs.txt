@@ -1,0 +1,3 @@
+GET https://<API_Gateway_Endpoint_URL>/Prod/cart/add
+GET https://<API_Gateway_Endpoint_URL>/Prod/cart/purchase
+GET https://<API_Gateway_Endpoint_URL>/Prod/products/123456
