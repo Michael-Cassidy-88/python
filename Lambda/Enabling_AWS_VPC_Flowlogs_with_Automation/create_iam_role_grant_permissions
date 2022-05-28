@@ -1,0 +1,8 @@
+# creates role
+
+aws iam create-role --role-name VPCFlowLogsRole --assume-role-policy-document file://"<file pathway to trust-policy.json>"
+
+# note the arn of the newly created role
+# grant new role permissions to CloudWatch Logs
+
+aws iam put-role-policy --role-name VPCFlowLogsRole --policy-name VPCFlowLogsPolicy --policy-document file://"< file pathway to vpc-flow-logs-iam-role.json>"
