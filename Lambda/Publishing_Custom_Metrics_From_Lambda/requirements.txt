@@ -1,0 +1,2 @@
+# indicates the dependancies that our Lambda function has, which will be packaged up by SAM
+boto3
