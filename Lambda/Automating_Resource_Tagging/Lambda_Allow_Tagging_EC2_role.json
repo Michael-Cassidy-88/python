@@ -1,4 +1,4 @@
-# attach this policy to Lambda role
+# attach this role to your Lambda
 
 {
   "Version": "2012-10-17",
