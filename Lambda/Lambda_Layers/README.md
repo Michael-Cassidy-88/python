@@ -48,3 +48,9 @@ aws lambda publish-layer-version \
 ```
 
 Note the `LayerArn` in the output.
+
+Go Back to Functions --> TestRequests --> Layers --> Add Layer --> select "requests" (layer uploaded from the CLI) --> Version 1 or current --> Add and Save
+
+
+
+
