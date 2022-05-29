@@ -6,6 +6,6 @@
     "project_name": "example",
     "runtime": "python3.7",
     "s3_bucket": "zappa-kh2jm4it1",
-    "xray_tracing": true
+    "xray_tracing": true  # addtionally added after zappa output
   }
 }
