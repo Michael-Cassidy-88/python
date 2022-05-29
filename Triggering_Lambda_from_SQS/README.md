@@ -1,4 +1,4 @@
-# Imporant Info
+# Important Info
 
 ### If you want to trigger a Lambda Function from SQS to put items into DynamoDB, make sure to add the SQS Queue to your Lambda trigger.
 
